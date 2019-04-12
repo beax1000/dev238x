@@ -1,0 +1,72 @@
+<div class="row my-5">
+  <div class="col-md-12 col-lg-6">
+    <!-- <div class="row">
+      <div class="col">
+        <span>Image</span>
+      </div>
+      <div class="col">
+
+      </div>
+    </div> -->
+    <table class="table table-hover table-responsive">
+      <caption *ngIf="cartKeys.length!==0">List of products in your cart</caption>
+      <caption *ngIf="cartKeys.length===0">List of products in your cart is empty</caption>
+      <thead>
+        <tr>
+          <th scope="col">Image</th>
+          <th scope="col">Name</th>
+          <th scope="col">Unit Price</th>
+          <th scope="col">Qty</th>
+          <th scope="col">Cost</th>
+          <th scope="col">Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let key of cartKeys">
+            <td><img src="{{cart[key].imagelink}}" class="thumbnail" alt="{{cart[key].productDesc" /></td>
+            <td>{{cart[key].productName}}</td>
+            <td>{{cart[key].price | currency}}</td>
+            <td><input type="number" class="item-qty" [(ngModel)]="cart[key].quantity" (change)="updateSubTotal()" /></td>
+            <td>{{cart[key].cost | currency}}</td>
+            <td>
+              <button type="button" class="close" aria-label="Close" (click)="removeFromCart(key)">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-12 col-lg-6">
+    <h1>Enter Shipping Details</h1>
+    <form class="needs-validation my-2" (ngSubmit)="sendShippingInfo()" [formGroup]="form">
+        <div class="form-group" *ngFor="let key of modelKeys">
+          <input class="form-control" 
+            [ngClass]="{
+              'is-valid': !form.controls[key].invalid,
+              'is-invalid': form.controls[key].invalid
+            }"
+            placeholder="Enter {{key | stringHumanize}} Here" formControlName="{{key}}"
+            attr.aria-describedby="{{key==='phoneNumber' ? 'phoneHelp' : undefined}}" />
+          <small id="phoneHelp" class="form-text text-muted" *ngIf="key==='phoneNumber'">Phone number must consist of only digits and it has to have a maximum length of 10</small>
+          <div class="invalid-feedback">
+            Please provide a valid {{key | stringHumanize | lowercase}}
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Checkout</button>
+    </form>
+    <div class="row">
+      <div class="col-2">Subtotal:</div>
+      <div class="col-1">{{subTotal | currency}}</div>
+    </div>
+    <div class="row">
+      <div class="col-2">Shipping:</div>
+      <div class="col-1" *ngIf="shippingCost===0">FREE</div> 
+      <div class="col-1" *ngIf="shippingCost!==0">{{shippingCost | currency}}</div> 
+    </div>
+    <div class="row">
+      <div class="col-2">Tax ({{taxRate * 100}}%):</div>
+      <div class="col-1">{{tax | currency}}</div>
+    </div>
+  </div>
+</div>

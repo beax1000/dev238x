@@ -1,0 +1,86 @@
+<div class="row" *ngIf="itemsData">
+  <div class="col">
+    <span>Showing {{itemsShownCount}} of {{itemsInSubCatCount}} in <span class="font-weight-bold">{{selectedSubCatName}}</span></span>
+  </div>
+  <div class="col">
+      <div class="row justify-content-end align-items-center">
+        <div class="mr-5">
+          <label class="d-inline-block pr-2" for="toggleInStockOnly">
+            In Stock Only:
+          </label>
+          <input type="checkbox" id="toggleInStockOnly" data-md-icheck 
+            (change)="toggleInStockOnly($event)">
+        </div>
+        <div class="mr-5">
+            
+          <label class="d-inline-block pr-2" for="sortBy">
+            Sort By:
+          </label>
+          <div class="dropdown d-inline-block">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="sortBy" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{sortByText}}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="sortBy">
+              <a class="dropdown-item" (click)="manageItemsSorting('none')">None</a>
+              <a class="dropdown-item" (click)="manageItemsSorting('price')">Price</a>
+              <a class="dropdown-item" (click)="manageItemsSorting('alpha')">Alphabetical</a>
+              <a class="dropdown-item" (click)="manageItemsSorting('rating')">Rating</a>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<div class="row" *ngIf="itemsData">
+  <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+    <div class="d-flex flex-column justify-content-start align-items-start">
+      <div class="w-100" *ngFor="let category of itemsData; index as iCat;">
+        <a 
+          [ngClass]="{
+            'btn': true,
+            'btn-primary': category.category === selectedCatName,
+            'btn-secondary': category.category !== selectedCatName,
+            'd-block': true,
+            'text-left': true
+          }"
+          data-toggle="collapse" 
+          href="#subcategories{{iCat}}" 
+          role="button" 
+          aria-expanded="false"
+          (click)="selectCat(iCat)">{{category.category}}</a>
+        <div class="collapse" id="subcategories{{iCat}}">
+          <div class="card card-body">
+            <a 
+              [ngClass]="{
+                'd-block': true,
+                'sub-cat': true,
+                'font-weight-bold': subcat.name === selectedSubCatName
+              }"
+              *ngFor="let subcat of category.subcategories; index as iSubCat;" (click)="selectSubCat(iCat,iSubCat)">{{subcat.name}}</a>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+  <div class="col-12 col-sm-6 col-md-8 col-xl-9">
+    <div class="d-flex flex-row flex-wrap justify-content-center justify-content-md-start">
+      <div class="image-thumbnail" *ngFor="let item of items; index as iItem;">
+        <!-- <img src="{{item.imagelink}}" class="img-thumbnail" alt="{{item.description}}" /> -->
+        <div class="card">
+          <div class="row no-gutters">
+              <div class="col-md-6">
+                  <img src="{{item.imagelink}}" class="img-thumbnail"  alt="{{item.description}}" />
+              </div>
+              <div class="col-md-6">
+                <div class="card-body">
+                  <a [routerLink]="['/product']" [queryParams]="{name: item.name}"><h5 class="card-title">{{item.name}}</h5></a>
+                  <p class="card-text">{{item.price | currency}}</p>
+                  <button type="button" class="btn btn-outline-secondary" (click)="addProductToCart(item)">Add</button>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+@mixin extra-small-and-above {
+    @media only screen and (min-width: 0) {
+        @content;
+    }
+}
+
+@mixin small-and-above {
+    @media only screen and (min-width: $sm) {
+        @content;
+    }
+}
+
+@mixin medium-and-above {
+    @media only screen and (min-width: $md) {
+        @content;
+    }
+}
+
+@mixin large-and-above {
+    @media only screen and (min-width: $lg) {
+        @content;
+    }
+}
+
+@mixin extra-large-and-above {
+    @media only screen and (min-width: $xl) {
+        @content;
+    }
+}
+
+@mixin below-md {
+    @media only screen and (max-width: $md-) {
+        @content;
+    }
+}
+
+@mixin below-lg {
+    @media only screen and (max-width: $lg-) {
+        @content;
+    }
+}

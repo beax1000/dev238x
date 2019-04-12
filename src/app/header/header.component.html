@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+    <a class="navbar-brand" [routerLink]="['/']">Grocery Cloud <span class="sr-only">(current)</span></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerHeader" aria-controls="navbarTogglerHeader" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerHeader">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item text-right"  [routerLinkActive]='["link-active"]'>
+        <a class="nav-link" [routerLink]="['/shopping']">Shop All</a>
+      </li>
+      <li class="nav-item text-right">
+        <span class="fas fa-circle navbar-text mt-2 sep"></span>
+      </li>
+      <li class="nav-item text-right" [routerLinkActive]="['link-active']">
+        <a class="nav-link" [routerLink]="['/cart']"><span class="fas fa-shopping-cart"></span></a>
+      </li>
+    </ul>
+  </div>
+</nav>

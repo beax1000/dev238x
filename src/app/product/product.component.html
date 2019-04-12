@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col">
+    <button type="button" class="btn btn-primary btn-lg" [routerLink]="['/']">< BACK</button> 
+  </div> 
+</div> 
+<div class="row" *ngIf="item">
+  <div class="col">
+      <img src="{{item.imagelink}}" class="d-block image mx-auto"
+        alt="{{item.description}}">
+  </div>
+  <div class="col">
+    <div class="d-flex flex-column justify-content-start align-items-center">
+        <div>{{item.name}}</div>
+        <div>{{item.description}}</div>
+        <div>{{item.price}}</div>
+        <div>{{item.rating}}</div>
+        <div>{{item.stock}}</div>
+        <div>{{item.category}}</div>
+        <div>{{item.subcategory}}</div>
+        <!-- <form>
+          <input type="number" step="1" min="1" [(ngModel)]="qtyToBuy" />
+          <button type="button" class="btn btn-outline-secondary" (click)="addProductToCart()">Add</button>
+        </form> -->
+        <input type="number" step="1" min="1" [(ngModel)]="qtyToBuy" />
+        <button type="button" class="btn btn-outline-secondary" (click)="addProductToCart()">Add</button>
+    </div>
+  </div>
+</div>

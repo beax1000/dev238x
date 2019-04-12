@@ -1,0 +1,107 @@
+<div class="container-fluid">
+  <div class="row align-items-stretch">
+    <div class="col-sm-8">
+      <h1>Welcome to Grocery Cloud 2.0</h1>
+      <h3>The best way to shop for groceries online</h3>
+    </div>
+    <!-- <div class="d-flex align-items-stretch">
+      <div class="col-4 text-right">
+        <button type="button" class="btn btn-primary btn-lg">SHOP ALL ></button>
+      </div>
+    </div> -->
+    <div class="col-sm-4 text-right">
+      <button type="button" class="btn btn-primary btn-lg w-50 h-75 mt-2" [routerLink]="['/shopping']">SHOP ALL ></button>
+    </div>
+  </div>
+  <div class="row justify-content-end">
+    <div class="col text-right">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="toggleShow" data-md-icheck [(ngModel)]="toggleShowCheck"
+          (change)="toggleShow($event)">
+        <label class="form-check-label" for="toggleShow">
+          Toggle Slide Show
+        </label>
+      </div>
+    </div>
+  </div>
+  <!-- <div id="top-products-show"> -->
+
+  <div id="carouselProducts" class="carousel slide mx-5 my-1" data-iterval="3000">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselProducts" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselProducts" data-slide-to="1"></li>
+      <li data-target="#carouselProducts" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active image-border">
+        <div class="row align-items-stretch">
+          <div class="col-lg-6 image-border-right image-border-bottom-lg">
+            <a [routerLink]="['/product']" [queryParams]="{name: topProducts.product1.name}" *ngIf="topProducts">
+              <img src="{{topProducts.product1.imagelink}}" class="d-block image mx-auto"
+                alt="{{topProducts.product1.description}}">
+            </a>
+          </div>
+
+          <div class="col-lg-6 pl-0">
+            <div class="d-flex flex-column justify-content-between h-100">
+              <div class="col image-border-bottom">
+                <a [routerLink]="['/product']" [queryParams]="{name: topProducts.product2.name}" *ngIf="topProducts">
+                  <img src="{{topProducts.product2.imagelink}}" class="d-block image-half mx-auto"
+                    alt="{{topProducts.product2.description}}">
+                </a>
+              </div>
+              <div class="col">
+                <a [routerLink]="['/product']" [queryParams]="{name: topProducts.product3.name}" *ngIf="topProducts">
+                  <img src="{{topProducts.product3.imagelink}}" class="d-block image-half mx-auto"
+                    alt="{{topProducts.product3.description}}">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item image-border">
+        <div class="row align-items-stretch">
+          <div class="col-lg-6 image-border-right image-border-bottom-lg">
+            <a [routerLink]="['/product']" [queryParams]="{name: topProducts.product4.name}" *ngIf="topProducts">
+              <img src="{{topProducts.product4.imagelink}}" class="d-block image mx-auto"
+                alt="{{topProducts.product4.description}}">
+            </a>
+          </div>
+          <div class="col-lg-6 pl-0">
+            <a [routerLink]="['/product']" [queryParams]="{name: topProducts.product5.name}" *ngIf="topProducts">
+              <img src="{{topProducts.product5.imagelink}}" class="d-block image mx-auto"
+                alt="{{topProducts.product5.description}}">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item image-border">
+        <div class="row align-items-stretch">
+          <div class="col-lg-6 image-border-right image-border-bottom-lg">
+            <a [routerLink]="['/product']" [queryParams]="{name: topProducts.product6.name}" *ngIf="topProducts">
+              <img src="{{topProducts.product6.imagelink}}" class="d-block image mx-auto"
+                alt="{{topProducts.product6.description}}">
+            </a>
+          </div>
+          <div class="col-lg-6 pl-0">
+            <a [routerLink]="['/product']" [queryParams]="{name: topProducts.product7.name}" *ngIf="topProducts">
+              <img src="{{topProducts.product7.imagelink}}" class="d-block image mx-auto"
+                alt="{{topProducts.product7.description}}">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev justify-content-start ml-n5" href="#carouselProducts" role="button"
+      data-slide="prev">
+      <span class="carousel-control-prev-icon fas fa-chevron-left text-secondary" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next justify-content-end mr-n5" href="#carouselProducts" role="button" data-slide="next">
+      <span class="carousel-control-next-icon fas fa-chevron-right text-secondary" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  <!-- </div> -->
+</div>

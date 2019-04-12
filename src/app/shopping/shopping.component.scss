@@ -1,0 +1,31 @@
+@import "../../scss/base/variables.scss";
+@import "../../scss/base/mixins.scss";
+
+.sub-cat {
+    cursor: pointer;
+}
+
+.sub-cat:hover,
+.sub-cat:focus {
+    border: 1px solid $color-secondary;
+    background: whitesmoke;
+}
+
+.image-thumbnail {
+    width: 24em;
+    height: 14em;
+    @include below-md {
+        height: 24em;
+    }
+}
+
+img {
+    height: 12em;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.dropdown-item {
+    cursor: pointer;
+}

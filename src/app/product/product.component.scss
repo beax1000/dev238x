@@ -1,0 +1,20 @@
+@import "../../scss/base/variables.scss";
+@import "../../scss/base/mixins.scss";
+
+.image {
+    max-width: 40vw;
+    @include extra-small-and-above {
+        height: 40vh;
+    }
+    @include small-and-above {
+        height: 50vh;
+    }
+    @include medium-and-above {
+        height: 64vh;
+    }
+    @include large-and-above {
+        height: 80vh;
+    }
+    object-fit: cover;
+    object-position: center;
+}

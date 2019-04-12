@@ -1,0 +1,14 @@
+$text-small: 0.3em;
+$color-primary: rgb(0, 123, 255);
+$color-secondary: rgb(108, 117, 125);
+$sm: 36em;  // small devices (landscape phones, 576px and up)
+            // 576 px / 16 px = 36em
+$md: 48em;  // Medium devices (tablets, 768px and up)
+            // 768 px / 16 px = 48em
+$lg: 62em;  // Large devices (desktops, 992px and up)
+            // 992px / 16px = 62em
+$xl: 75em;  // Extra large devices (large desktops, 1200px and up)
+            // 1200px / 16px = 75em
+$md-: 48em - 0.02;
+$lg-: 62em - 0.02;  // above this (991.98px) we have large devices (desktops, less than 1200px)
+                    // 992px / 16px = 62em 
