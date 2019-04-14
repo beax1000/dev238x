@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ItemData, Item } from '../models/itemsData';
-import { ItemsDataService } from '../services/itemsDataService';
-//import { strictEqual } from 'assert';
-import { ShoppingCartService } from '../services/shoppingCartService';
+//import { PreviousRouteService } from '../services/previous-route.service';
+import { ItemsDataService } from '../services/items-data.service';
+import { ShoppingCartService } from '../services/shopping-cart.service';
 import { CartItem } from '../models/cartData';
 
 @Component({
@@ -28,7 +28,10 @@ export class ShoppingComponent implements OnInit {
   private sortByAlpha: string = "alpha";
   private sortByRating: string = "rating";
 
-  constructor(private itemsService: ItemsDataService, private cartService: ShoppingCartService) { }
+  constructor(
+    //private prevRouteService: PreviousRouteService,
+    private itemsService: ItemsDataService, 
+    private cartService: ShoppingCartService) { }
 
   ngOnInit() {
     this.itemsService.getItemsData().subscribe(itemsData => {
@@ -44,9 +47,19 @@ export class ShoppingComponent implements OnInit {
     this.updateSelection(iCat, 0);
   }
 
+  // rubric26
+  // Clicking on a subcategory should repopulate the grid of products
+  // with items from the subcategory that was just clicked. 
+
+  // rubric28
+  // The section of the controls bar that displays the number of items
+  // shown out of the total number of items in the selected category
+  // should update whenever a new subcategory is selected or
+  // whenever the "In Stock Only" switch is toggled. 
   selectSubCat(iCat: number, iSubCat: number) {
     this.updateSelection(iCat, iSubCat);
   }
+
 
   private updateSelection(iCat: number, iSubCat: number) {
     if (this.itemsData) {
@@ -55,6 +68,9 @@ export class ShoppingComponent implements OnInit {
       this.selectedCatName = selectedCat.category;
       this.selectedSubCatIndex = iSubCat;
       let selectedSubCat = selectedCat.subcategories[this.selectedSubCatIndex];
+      // rubric27
+      // Clicking on a subcategory should change the name of the selected
+      // category in the controls bar
       this.selectedSubCatName = selectedSubCat.name;
       this.itemsInSubCatCount = selectedSubCat.items.length;
       let items = selectedSubCat.items;
@@ -65,9 +81,13 @@ export class ShoppingComponent implements OnInit {
     }
   }
 
+  // rubric28
+  // The section of the controls bar that displays the number of items
+  // shown out of the total number of items in the selected category
+  // should update whenever a new subcategory is selected or
+  // whenever the "In Stock Only" switch is toggled. 
   toggleInStockOnly(e) {
     this.onlyInStock = e.target.checked;
-    //console.log(marked);
     if (this.onlyInStock) {
       this.items = this.filterInStockOnly(this.items);
       this.itemsShownCount = this.items.length;
@@ -82,14 +102,19 @@ export class ShoppingComponent implements OnInit {
     var filteredItems: Item[] = [];
     for (let i:number=0; i < itemsToFilter.length; i++) {
       let item = itemsToFilter[i];
-      //console.log(item.stock);
       let stock: number = Number(item.stock);
       if (Number.isNaN(stock)) stock = 0;
+      // rubric29
+      // If the "In Stock Only" toggle is checked, only items that are in
+      // stock should be shown in the products grid. 
       if (stock > 0) filteredItems.push(item);
     }
     return filteredItems;
   }
 
+  // rubric33
+  // Changing the selected sorting method should reorder the
+  // products in the grid
   manageItemsSorting(sortBy: string) {
     switch(sortBy) {
       case this.sortByNone:
@@ -136,6 +161,9 @@ export class ShoppingComponent implements OnInit {
     return sortedItems;
   }
 
+  // rubric30
+  // Clicking on the "Add" button inside a grid cell should add 1 unit of
+  // the associated product to the shopping cart
   addProductToCart(item: Item) {
     var ci: CartItem = new CartItem(
       item.name,

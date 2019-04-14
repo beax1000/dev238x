@@ -14,9 +14,10 @@ import { AboutComponent } from './about/about.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 
-import { ItemsDataService } from './services/itemsDataService';
-import { RandomUtilsService } from './services/randomUtilsService';
-import { ShoppingCartService } from './services/shoppingCartService';
+import { ItemsDataService } from './services/items-data.service';
+import { RandomUtilsService } from './services/random-utils.service';
+import { ShoppingCartService } from './services/shopping-cart.service';
+import { PreviousRouteService } from './services/previous-route.service';
 import { StringHumanizePipe } from './pipes/string-humanize.pipe';
 
 @NgModule({
@@ -42,7 +43,8 @@ import { StringHumanizePipe } from './pipes/string-humanize.pipe';
   providers: [
     ItemsDataService,
     RandomUtilsService,
-    ShoppingCartService
+    ShoppingCartService,
+    PreviousRouteService
   ],
   bootstrap: [AppComponent]
 })

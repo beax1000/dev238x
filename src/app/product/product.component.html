@@ -1,27 +1,60 @@
 <div class="row">
+  <!--rubric43-->
+  <!--The user should see a button labeled "Back"-->
+
+  <!--rubric45-->
+  <!--Clicking the "Back" button should take the user back to where
+      they came from, whether it was the Shopping page or the
+      Product Page.-->
   <div class="col">
-    <button type="button" class="btn btn-primary btn-lg" [routerLink]="['/']">< BACK</button> 
+    <button type="button" class="btn btn-primary btn-lg d-block ml-5 mt-5" [routerLink]="[prevRoute]">< BACK</button> 
   </div> 
 </div> 
 <div class="row" *ngIf="item">
+  <!--rubric36-->
+  <!--The user should see an image of the selected product-->
   <div class="col">
       <img src="{{item.imagelink}}" class="d-block image mx-auto"
         alt="{{item.description}}">
   </div>
   <div class="col">
+    <!--rubric80-->
+    <!--Used jQuery or Angular for data binding-->
     <div class="d-flex flex-column justify-content-start align-items-center">
-        <div>{{item.name}}</div>
-        <div>{{item.description}}</div>
-        <div>{{item.price}}</div>
-        <div>{{item.rating}}</div>
-        <div>{{item.stock}}</div>
-        <div>{{item.category}}</div>
-        <div>{{item.subcategory}}</div>
-        <!-- <form>
-          <input type="number" step="1" min="1" [(ngModel)]="qtyToBuy" />
-          <button type="button" class="btn btn-outline-secondary" (click)="addProductToCart()">Add</button>
-        </form> -->
-        <input type="number" step="1" min="1" [(ngModel)]="qtyToBuy" />
+        <!--rubric35-->
+        <!--The user should see the name of the selected product-->
+        <h1 class="py-2">{{item.name}}</h1>
+        <!--rubric37-->
+        <!--The user should see the rating of the selected product-->
+        <h2 class="py-2">Rating: {{item.rating}}/5</h2>
+        <!--rubric38-->
+        <!--The user should see the number of items in stock of the selected
+            product-->
+        <h5 class="py-2">Stock: {{item.stock}}</h5>
+        <!--rubric39-->
+        <!--The user should see the price of the selected product-->
+        <h5 class="py-2">{{item.price | currency}}</h5>
+        <!--rubric40-->
+        <!--The user should see a description of the selected product-->
+        <h5 class="font-italic py-2">{{item.description}}</h5>
+        <!--rubric42-->
+        <!--The user should see an input field labeled "Qty"-->
+
+        <!--rubric44-->
+        <!--Clicking the "Add" button should add the number of units
+            specified in the "Qty" input field of the selected product to the
+            shopping cart-->
+        <div class="py-5">
+          <label for="qty">Qty:</label>
+          <input type="number" class="d-inline-block item-qty" id="qty" step="1" min="1" [(ngModel)]="qtyToBuy" />
+        </div>
+        <!--rubric41-->
+        <!--The user should see a button labeled "Add"-->
+
+        <!--rubric44-->
+        <!--Clicking the "Add" button should add the number of units
+            specified in the "Qty" input field of the selected product to the
+            shopping cart-->
         <button type="button" class="btn btn-outline-secondary" (click)="addProductToCart()">Add</button>
     </div>
   </div>

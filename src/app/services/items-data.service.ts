@@ -4,9 +4,7 @@ import { Observable, pipe } from 'rxjs';
 import { map, catchError, publishReplay, refCount } from 'rxjs/operators';
 
 import { ItemData, Item, ProductInfo } from '../models/itemsData';
-import { RandomUtilsService } from '../services/randomUtilsService';
-/* import { isNumber } from 'util';
-import { normalize } from 'path'; */
+import { RandomUtilsService } from '../services/random-utils.service';
 
 @Injectable()
 export class ItemsDataService {
@@ -19,6 +17,8 @@ export class ItemsDataService {
     }
 
     public getItemsData(): Observable<ItemData[]> {
+        // rubric81
+        // Data was accessed using the Azure Web API and not a local file
         if (this.itemsData === null) {
             this.itemsData = this.http.get(' https://webmppcapstone.blob.core.windows.net/data/itemsdata.json')
                 .pipe(
@@ -29,14 +29,6 @@ export class ItemsDataService {
                     refCount(),
                     catchError(err => this.handleError(err))
                 );
-            // .pipe(
-            //     map(items => {
-            //         return items.json() as ItemData[];
-            //     }),
-            //     catchError(err => this.handleError(err))
-            // ))
-
-
         }
         return this.itemsData;
     }
@@ -51,7 +43,6 @@ export class ItemsDataService {
             var nAttempt: number = 1;   // attempt number
             var nMaxAttempts: number = 100;   // max number of attempts to retrieve products
             var nCats: number = itemsData.length;  // number of total categories in our product catalog
-            //for (var iProd=0; iProd<this.nTopProducts; iProd++) {
             while (iProd < nTopProducts && nAttempt <= nMaxAttempts) {
                 // randomly choose a category
                 let iCat: number = this.randomService.randomInt(0, nCats - 1);
@@ -79,7 +70,6 @@ export class ItemsDataService {
                 }
                 nAttempt++;
             }
-            console.log(this.topProducts);
         }
         return this.topProducts;
     }
@@ -89,9 +79,6 @@ export class ItemsDataService {
             this.products = {};
             for (let iCat: number=0; iCat < itemsData.length; iCat++) {
                 for (let iSubCat: number=0; iSubCat < itemsData[iCat].subcategories.length; iSubCat++) {
-                    /* for (let iItem: number=0; iItem < itemsData[iCat].subcategories[iSubCat].items.length; iItem++) {
-
-                    } */
                     this.normalizeArray<Item>(itemsData[iCat].subcategories[iSubCat].items, 'name', this.products);
                 }
             }

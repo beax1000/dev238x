@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, interval, Subscription } from 'rxjs';
 
-
-import { ItemsDataService } from '../services/itemsDataService';
+import { ItemsDataService } from '../services/items-data.service';
 import { ItemData, ProductInfo, TopSevenProducts } from '../models/itemsData';
-//import * as $ from 'jquery';
-//import 'popper.js';
-//import 'bootstrap';
-//import 'bootstrap/js/dist/carousel';
 
 @Component({
   selector: 'app-home',
@@ -20,9 +16,14 @@ export class HomeComponent implements OnInit {
   topProducts: TopSevenProducts; // top seven products in catalog
 
   toggleShowCheck: boolean = false;
-  //marked: boolean = false;
+  // rubric10
+  // If the "Toggle Slide Show" switch is checked, the product carousel should automatically 
+  // move forward one slide every 3 seconds 
+  slideInterval: number = 3000; // corousel's slide interval in milliseconds
+  slider: Subscription;
 
-  constructor(private itemsService: ItemsDataService) {
+  constructor(
+    private itemsService: ItemsDataService) {
     this.nTopProducts = 7;  // we select 7 top products
     this.itemsService.getItemsData().subscribe(itemsData => {
       this.itemsData = itemsData;
@@ -36,71 +37,29 @@ export class HomeComponent implements OnInit {
         product6: topProducts[5],
         product7: topProducts[6]
       };
-      console.log(this.topProducts);
-      console.log(this.itemsData[0]);
     });
   }
 
   ngOnInit() {
-    $('.carousel').carousel('cycle');
-
-    $('.carousel').on('slid.bs.carousel', function () {
-      var toStopShow: boolean = $('#toggleShow').attr("stop-show") == "true" ? true : false;
-      if (toStopShow) {
-        //$('.carousel').carousel('dispose');
-        $('.carousel').attr('data-interval', "false");
-        $('.carousel').carousel('pause');
-        
-      }
-      else {
-        $('.carousel').attr('data-interval', 3000);
-        $('.carousel').carousel('cycle');
-      }
-
-    });
-
-    /* $('.carousel').on('slide.bs.carousel', function () {
-      var toStopShow: boolean = $('#toggleShow').attr("stop-show") == "true" ? true : false;
-      if (toStopShow) {
-        //$('.carousel').carousel('dispose');
-        $('.carousel').attr('data-interval', "false");
-        $('.carousel').carousel('pause');
-        
-      }
-
-    }); */
-
-    $('.carousel').on('mouseleave', function() {
-      var toStopShow: boolean = $('#toggleShow').attr("stop-show") == "true" ? true : false;
-      if (toStopShow) {
-        $('.carousel').carousel('dispose');
-        /* $('.carousel').attr('data-interval', "false");
-        $('.carousel').carousel('pause'); */
-        
-      }
-    });
+    $('.carousel').attr('data-interval', "false");
+    $('.carousel').attr('data-ride', 'false');
   }
 
   toggleShow(e) {
     var marked: boolean = e.target.checked;
-    $('#toggleShow').attr('stop-show', marked ? "true" : "false");
-    if (marked) {
-      //$('.carousel').carousel('pause');
-      $('.carousel').attr('data-interval', "false");
-      $('.carousel').carousel('pause');
-
-      
+    if (!marked) {
+      if (this.slider) {
+        this.slider.unsubscribe();
+      }
     }
     else {
-
-      //$('.carousel').carousel('cycle');
-      /* $('.carousel').carousel({
-        interval: 3000
-      }); */
-
-
-      $('.carousel').attr('data-interval', 3000);
-      $('.carousel').carousel('cycle');
+      // rubric10
+      // If the "Toggle Slide Show" switch is checked, the product carousel should automatically 
+      // move forward one slide every 3 seconds 
+      this.slider = interval(this.slideInterval).subscribe(x => {
+        $('.carousel').carousel('next');
+      });
+      
     }
   }
 }

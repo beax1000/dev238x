@@ -1,9 +1,27 @@
 <div class="row" *ngIf="itemsData">
+  <!--rubric15-->
+      <!--The user shall see a section in the controls bar that displays the
+          selected category name-->
+
+  <!--rubric16-->
+  <!--The user shall see a section in the controls bar that displays the
+      number of items shown out of the total number of items in the
+      selected category -->
+
+  <!--rubric27-->
+  <!--Clicking on a subcategory should change the name of the selected
+      category in the controls bar-->
+
+  <!--rubric80-->
+  <!--Used jQuery or Angular for data binding-->
   <div class="col">
     <span>Showing {{itemsShownCount}} of {{itemsInSubCatCount}} in <span class="font-weight-bold">{{selectedSubCatName}}</span></span>
   </div>
   <div class="col">
       <div class="row justify-content-end align-items-center">
+        <!--rubric17-->
+        <!--The user shall see a toggle switch labeled “In Stock Only” in the
+            controls bar-->
         <div class="mr-5">
           <label class="d-inline-block pr-2" for="toggleInStockOnly">
             In Stock Only:
@@ -11,8 +29,15 @@
           <input type="checkbox" id="toggleInStockOnly" data-md-icheck 
             (change)="toggleInStockOnly($event)">
         </div>
+        <!--rubric18-->
+        <!--The user shall see a dropdown list labeled "Sort By" that has the
+            following options: (None, Price, Alphabetical, Rating) in the
+            controls bar -->
+
+        <!--rubric33-->
+        <!--Changing the selected sorting method should reorder the
+            products in the grid-->
         <div class="mr-5">
-            
           <label class="d-inline-block pr-2" for="sortBy">
             Sort By:
           </label>
@@ -31,9 +56,20 @@
       </div>
   </div>
 </div>
+<!--rubric14-->
+<!--The user shall see a controls bar-->
 <div class="row" *ngIf="itemsData">
   <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+    <!--rubric80-->
+    <!--Used jQuery or Angular for data binding-->
     <div class="d-flex flex-column justify-content-start align-items-start">
+      <!--rubric19-->
+      <!--The user shall see a category menu that displays all of the
+          available shopping categories -->
+      
+      <!--rubric25-->
+      <!--Clicking on a category name in the category menu should toggle a
+          dropdown of the available subcategories within that category-->
       <div class="w-100" *ngFor="let category of itemsData; index as iCat;">
         <a 
           [ngClass]="{
@@ -48,6 +84,13 @@
           role="button" 
           aria-expanded="false"
           (click)="selectCat(iCat)">{{category.category}}</a>
+        <!--rubric25-->
+        <!--Clicking on a category name in the category menu should toggle a
+            dropdown of the available subcategories within that category-->
+
+        <!--rubric26-->
+        <!--Clicking on a subcategory should repopulate the grid of products
+            with items from the subcategory that was just clicked.-->
         <div class="collapse" id="subcategories{{iCat}}">
           <div class="card card-body">
             <a 
@@ -63,18 +106,42 @@
     </div> 
   </div>
   <div class="col-12 col-sm-6 col-md-8 col-xl-9">
+    <!--rubric20-->
+    <!--The user shall see a grid that is populated with the products of
+        the selected category-->
+
+    <!--rubric80-->
+    <!--Used jQuery or Angular for data binding-->
     <div class="d-flex flex-row flex-wrap justify-content-center justify-content-md-start">
       <div class="image-thumbnail" *ngFor="let item of items; index as iItem;">
-        <!-- <img src="{{item.imagelink}}" class="img-thumbnail" alt="{{item.description}}" /> -->
         <div class="card">
           <div class="row no-gutters">
+              <!--rubric23-->
+              <!--Each grid cell shall have an image of the product displayed-->
               <div class="col-md-6">
-                  <img src="{{item.imagelink}}" class="img-thumbnail"  alt="{{item.description}}" />
+                  <!--rubric31-->
+                  <!--If the user clicks on a product image within a grid cell, they should
+                      be taken to a product page that is populated with the details of
+                      the clicked product-->
+                  <a [routerLink]="['/product']" [queryParams]="{name: item.name}">
+                    <img src="{{item.imagelink}}" class="img-thumbnail"  alt="{{item.description}}" />
+                  </a>
               </div>
               <div class="col-md-6">
                 <div class="card-body">
+                  <!--rubric21-->
+                  <!--Each grid cell shall have the name of the product displayed-->
+
+                  <!--rubric32-->
+                  <!--If the user clicks on a product name within a grid cell, they should
+                      be taken to a product page that is populated with the details of
+                      the clicked product-->
                   <a [routerLink]="['/product']" [queryParams]="{name: item.name}"><h5 class="card-title">{{item.name}}</h5></a>
+                  <!--rubric22-->
+                  <!--Each grid cell shall have the price of the product displayed-->
                   <p class="card-text">{{item.price | currency}}</p>
+                  <!--rubric24-->
+                  <!--Each grid cell shall have a button labeled "Add"-->
                   <button type="button" class="btn btn-outline-secondary" (click)="addProductToCart(item)">Add</button>
                 </div>
               </div>

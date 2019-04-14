@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CartItem } from '../models/cartData';
+import { forEach } from '@angular/router/src/utils/collection';
+import { strictEqual } from 'assert';
 
 @Injectable()
 export class ShoppingCartService {
@@ -8,6 +10,7 @@ export class ShoppingCartService {
     cart: {[key:string]:CartItem} = {};
     subtotal: number = 0;
     tax: number = 0;
+    total: number = 0;
 
     addToCart(item: CartItem) {
         if (this.cart.hasOwnProperty(item.productName)) 
@@ -22,5 +25,12 @@ export class ShoppingCartService {
         for (let productName in this.cart) 
             this.subtotal += this.cart[productName].cost;
         this.tax = this.subtotal * this.taxRate;
+        this.total = this.subtotal + this.shipCost + this.tax;
+    }
+
+    clearCart() {
+        for (let key in this.cart)
+            delete this.cart[key];
+        this.updateSubTotal();
     }
 }

@@ -1,54 +1,93 @@
-<p>
-  contact works!
-</p>
-<div class="row">
-  <div class="col">
-    <form class="needs-validation" (ngSubmit)="contactUs()" [formGroup]="form">
-      <div class="form-group" *ngFor="let key of modelKeys">
-        <input class="form-control" 
-          [ngClass]="{
-            'is-valid': !form.controls[key].invalid,
-            'is-invalid': form.controls[key].invalid
-          }"
-          placeholder="Enter {{key | stringHumanize}} Here" 
-          formControlName="{{key}}"
-          *ngIf="key!=='subject' && key!=='message'" />
-        <select class="custom-select" 
-          [ngClass]="{
-            'is-valid': !form.controls[key].invalid,
-            'is-invalid': form.controls[key].invalid
-          }"
-          formControlName="{{key}}" *ngIf="key==='subject'">
-          <option value="">-- Select Subject --</option>
-          <option value="{{i}}" *ngFor="let subj of subjects; index as i">
-            {{subj}}
-          </option>
-        </select>
-        <textarea class="form-control"
-          [ngClass]="{
-            'is-valid': !form.controls[key].invalid,
-            'is-invalid': form.controls[key].invalid
-          }"
-          placeholder="Enter {{key | stringHumanize}} Here" 
-          rows="10"
-          formControlName="{{key}}" *ngIf="key==='message'"></textarea>
+<div class="container-fluid mx-5 my-3">
+  <div class="row">
+    <div class="col">
+      <!--rubric57-->
+      <!--The user should see a form with text input fields for name and
+          email, a dropdown list for subject, and a text area for a message.
+          These fields should have placeholders to show what they
+          represent-->
+      <form class="needs-validation" (ngSubmit)="contactUs()" [formGroup]="form">
+        <!--rubric61-->
+        <!--The form should show validation errors if the form isn’t filled out
+            correctly and the send button is pressed-->
 
-        <div class="invalid-feedback">
-          Please provide a valid {{key | stringHumanize | lowercase}}
+        <!--rubric80-->
+        <!--Used jQuery or Angular for data binding-->
+        <div class="form-group" *ngFor="let key of modelKeys">
+          <input class="form-control" 
+            [ngClass]="{
+              'is-valid': sendMessageAttempted && (!form.controls[key].invalid),
+              'is-invalid': sendMessageAttempted && form.controls[key].invalid
+            }"
+            placeholder="Enter {{key | stringHumanize}} Here" 
+            formControlName="{{key}}"
+            *ngIf="key!=='subject' && key!=='message'" />
+          <select class="custom-select" 
+            [ngClass]="{
+              'is-valid': sendMessageAttempted && (!form.controls[key].invalid),
+              'is-invalid': sendMessageAttempted && form.controls[key].invalid
+            }"
+            formControlName="{{key}}" *ngIf="key==='subject'">
+            <option value="">-- Select Subject --</option>
+            <option value="{{i}}" *ngFor="let subj of subjects; index as i">
+              {{subj}}
+            </option>
+          </select>
+          <textarea class="form-control"
+            [ngClass]="{
+              'is-valid': sendMessageAttempted && (!form.controls[key].invalid),
+              'is-invalid': sendMessageAttempted && form.controls[key].invalid
+            }"
+            placeholder="Enter {{key | stringHumanize}} Here" 
+            rows="10"
+            formControlName="{{key}}" *ngIf="key==='message'"></textarea>
+
+          <div class="invalid-feedback">
+            Please provide a valid {{key | stringHumanize | lowercase}}
+          </div>
+        </div>
+        <!--rubric59-->
+        <!--The user should see a button labeled "Send"-->
+
+        <!--rubric60-->
+        <!--The send button should create an alert based on the message
+            sent-->
+        <button type="submit" class="btn btn-primary d-inline-block" [disabled]="messageSent">Send</button>
+      </form>
+      <!--rubric60-->
+      <!--The send button should create an alert based on the message
+          sent-->
+
+      <!--rubric80-->
+      <!--Used jQuery or Angular for data binding-->
+      <div class="alert alert-success alert-dismissable fade show mt-5 mx-5" role="alert" *ngIf="messageSent">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="alert-heading">Well done!</h4>
+        <h6>Your message was sent:</h6>
+        <p *ngFor="let key of modelKeys">
+            {{key | stringHumanize}}: {{model[key]}}
+        </p>
+      </div>
+    </div>
+    <!--rubric58-->
+    <!--The user should see description that shows an email and phone
+        number for the contacting the business-->
+    <div class="col">
+      <div id="our-contacts" class="d-flex flex-column justify-content-between align-items-start">
+        <h4>
+          Have questions about Grocery Cloud? Feel free to contact us!
+        </h4>
+        <div>
+          <h4>
+            Email: grocerycloud@outlook.com
+          </h4>
+          <h4 class="pt-3">
+            Phone: 123-456-7890
+          </h4>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Send Message</button>
-    </form>
-  </div>
-  <div class="col">
-    <div>
-      Have questions about Grocery Cloud? Feel free to contact us!
-    </div>
-    <div>
-      Email: grocerycloud@outlook.com
-    </div>
-    <div>
-      Phone: 123-456-7890
     </div>
   </div>
 </div>

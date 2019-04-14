@@ -1,22 +1,28 @@
 <div class="container-fluid">
   <div class="row align-items-stretch">
+    <!--rubric04-->
+    <!--The user should see some text welcoming them to the website-->
     <div class="col-sm-8">
       <h1>Welcome to Grocery Cloud 2.0</h1>
       <h3>The best way to shop for groceries online</h3>
     </div>
-    <!-- <div class="d-flex align-items-stretch">
-      <div class="col-4 text-right">
-        <button type="button" class="btn btn-primary btn-lg">SHOP ALL ></button>
-      </div>
-    </div> -->
+    <!--rubric05-->
+    <!--The user should see a button labeled "Shop All" -->
     <div class="col-sm-4 text-right">
+      <!--rubric12-->
+      <!--If the user clicks on the "Shop All" button, the user should be
+          taken to the shopping page-->
       <button type="button" class="btn btn-primary btn-lg w-50 h-75 mt-2" [routerLink]="['/shopping']">SHOP ALL ></button>
     </div>
   </div>
   <div class="row justify-content-end">
+    <!--rubric80-->
+    <!--Used jQuery or Angular for data binding-->
     <div class="col text-right">
+      <!--rubric06-->
+      <!--The user should see a toggle switch labeled "Toggle Slide Show"-->
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="toggleShow" data-md-icheck [(ngModel)]="toggleShowCheck"
+        <input class="form-check-input" type="checkbox" data-md-icheck [(ngModel)]="toggleShowCheck"
           (change)="toggleShow($event)">
         <label class="form-check-label" for="toggleShow">
           Toggle Slide Show
@@ -24,18 +30,28 @@
       </div>
     </div>
   </div>
-  <!-- <div id="top-products-show"> -->
+  
+  <!--rubric01-->
+  <!--The user should see a product carousel that contains at least 3 slides of products,
+      with each slide having between 1 and 4 product images.-->
 
-  <div id="carouselProducts" class="carousel slide mx-5 my-1" data-iterval="3000">
+  <!--rubric11-->
+  <!--Whenever the product carousel changes it slide, it should do in an animated way-->
+  <div id="carouselProducts" class="carousel slide mx-5 my-1" data-pause="false">
     <ol class="carousel-indicators">
       <li data-target="#carouselProducts" data-slide-to="0" class="active"></li>
       <li data-target="#carouselProducts" data-slide-to="1"></li>
       <li data-target="#carouselProducts" data-slide-to="2"></li>
     </ol>
+    <!--rubric80-->
+    <!--Used jQuery or Angular for data binding-->
     <div class="carousel-inner">
       <div class="carousel-item active image-border">
         <div class="row align-items-stretch">
           <div class="col-lg-6 image-border-right image-border-bottom-lg">
+            <!--rubric09-->
+            <!--If the user clicks on a product image, they should be taken to a product page that is populated 
+                with the details of the clicked product-->
             <a [routerLink]="['/product']" [queryParams]="{name: topProducts.product1.name}" *ngIf="topProducts">
               <img src="{{topProducts.product1.imagelink}}" class="d-block image mx-auto"
                 alt="{{topProducts.product1.description}}">
@@ -45,12 +61,18 @@
           <div class="col-lg-6 pl-0">
             <div class="d-flex flex-column justify-content-between h-100">
               <div class="col image-border-bottom">
+                <!--rubric09-->
+                <!--If the user clicks on a product image, they should be taken to a product page that is populated 
+                    with the details of the clicked product-->
                 <a [routerLink]="['/product']" [queryParams]="{name: topProducts.product2.name}" *ngIf="topProducts">
                   <img src="{{topProducts.product2.imagelink}}" class="d-block image-half mx-auto"
                     alt="{{topProducts.product2.description}}">
                 </a>
               </div>
               <div class="col">
+                <!--rubric09-->
+                <!--If the user clicks on a product image, they should be taken to a product page that is populated 
+                    with the details of the clicked product-->
                 <a [routerLink]="['/product']" [queryParams]="{name: topProducts.product3.name}" *ngIf="topProducts">
                   <img src="{{topProducts.product3.imagelink}}" class="d-block image-half mx-auto"
                     alt="{{topProducts.product3.description}}">
@@ -63,12 +85,18 @@
       <div class="carousel-item image-border">
         <div class="row align-items-stretch">
           <div class="col-lg-6 image-border-right image-border-bottom-lg">
+            <!--rubric09-->
+            <!--If the user clicks on a product image, they should be taken to a product page that is populated 
+                with the details of the clicked product-->
             <a [routerLink]="['/product']" [queryParams]="{name: topProducts.product4.name}" *ngIf="topProducts">
               <img src="{{topProducts.product4.imagelink}}" class="d-block image mx-auto"
                 alt="{{topProducts.product4.description}}">
             </a>
           </div>
           <div class="col-lg-6 pl-0">
+            <!--rubric09-->
+              <!--If the user clicks on a product image, they should be taken to a product page that is populated 
+                  with the details of the clicked product-->
             <a [routerLink]="['/product']" [queryParams]="{name: topProducts.product5.name}" *ngIf="topProducts">
               <img src="{{topProducts.product5.imagelink}}" class="d-block image mx-auto"
                 alt="{{topProducts.product5.description}}">
@@ -79,12 +107,18 @@
       <div class="carousel-item image-border">
         <div class="row align-items-stretch">
           <div class="col-lg-6 image-border-right image-border-bottom-lg">
+            <!--rubric09-->
+              <!--If the user clicks on a product image, they should be taken to a product page that is populated 
+                  with the details of the clicked product-->
             <a [routerLink]="['/product']" [queryParams]="{name: topProducts.product6.name}" *ngIf="topProducts">
               <img src="{{topProducts.product6.imagelink}}" class="d-block image mx-auto"
                 alt="{{topProducts.product6.description}}">
             </a>
           </div>
           <div class="col-lg-6 pl-0">
+            <!--rubric09-->
+            <!--If the user clicks on a product image, they should be taken to a product page that is populated 
+                with the details of the clicked product-->
             <a [routerLink]="['/product']" [queryParams]="{name: topProducts.product7.name}" *ngIf="topProducts">
               <img src="{{topProducts.product7.imagelink}}" class="d-block image mx-auto"
                 alt="{{topProducts.product7.description}}">
@@ -93,15 +127,24 @@
         </div>
       </div>
     </div>
+    <!--rubric02-->
+    <!--The user should see a button that resembles a left arrow key to the left of the product carousel-->
+
+    <!--rubric08-->    
+    <!--Clicking on the left arrow should move the product carousel one slide back-->
     <a class="carousel-control-prev justify-content-start ml-n5" href="#carouselProducts" role="button"
       data-slide="prev">
       <span class="carousel-control-prev-icon fas fa-chevron-left text-secondary" aria-hidden="true"></span>
       <span class="sr-only">Previous</span>
     </a>
+    <!--rubric03-->
+    <!--The user should see a button that resembles a right arrow key to the right of the product carousel-->
+
+    <!--rubric07-->
+    <!--Clicking on the right arrow should move the product carousel one slide forward-->
     <a class="carousel-control-next justify-content-end mr-n5" href="#carouselProducts" role="button" data-slide="next">
       <span class="carousel-control-next-icon fas fa-chevron-right text-secondary" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
   </div>
-  <!-- </div> -->
 </div>

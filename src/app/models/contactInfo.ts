@@ -1,3 +1,8 @@
+// rubric57
+// The user should see a form with text input fields for name and
+// email, a dropdown list for subject, and a text area for a message.
+// These fields should have placeholders to show what they
+// represent
 export class ContactInfo {
     constructor(
         public name: string,

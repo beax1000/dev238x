@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ItemsDataService } from '../services/itemsDataService';
+import { ItemsDataService } from '../services/items-data.service';
 import { ItemData, ProductInfo, TopSevenProducts } from '../models/itemsData';
 
 @Component({

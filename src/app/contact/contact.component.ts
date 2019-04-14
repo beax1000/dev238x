@@ -16,8 +16,18 @@ export class ContactComponent implements OnInit {
   modelKeys: string[] = Object.keys(this.model);
   private nameFieldName = "name";
   private emailFieldName = "email";
+  private subjectFieldName = "subject";
+  sendMessageAttempted: boolean = false;
+  messageSent: boolean = false;
 
   constructor() { 
+    // rubric61
+    // The form should show validation errors if the form isn’t filled out
+    // correctly and the send button is pressed
+
+    // rubric80
+    // Used jQuery or Angular for data binding
+    
     this.modelKeys.forEach( (key) => {
       let validators = [];
       // we want to make all fields required
@@ -46,7 +56,14 @@ export class ContactComponent implements OnInit {
   }
 
   contactUs() {
-
+    this.modelKeys.forEach( (elem) => {
+      this.model[elem] = elem===this.subjectFieldName ? ContactInfo.subjects[this.form.value[elem]] : this.form.value[elem];
+    });
+    this.sendMessageAttempted = true;
+    // rubric60
+    // The send button should create an alert based on the message
+    // sent
+    this.messageSent = !this.form.invalid;
   }
 
 }

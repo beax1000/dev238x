@@ -1,13 +1,9 @@
 <div class="row my-5">
   <div class="col-md-12 col-lg-6">
-    <!-- <div class="row">
-      <div class="col">
-        <span>Image</span>
-      </div>
-      <div class="col">
-
-      </div>
-    </div> -->
+    <!--rubric47-->
+    <!--The user should see a table displaying the product image, name, unit
+        price, quantity as an input field, total cost, and a remove button
+        for each product in the shopping cart-->
     <table class="table table-hover table-responsive">
       <caption *ngIf="cartKeys.length!==0">List of products in your cart</caption>
       <caption *ngIf="cartKeys.length===0">List of products in your cart is empty</caption>
@@ -22,14 +18,22 @@
         </tr>
       </thead>
       <tbody>
+          <!--rubric80-->
+          <!--Used jQuery or Angular for data binding-->
           <tr *ngFor="let key of cartKeys">
             <td><img src="{{cart[key].imagelink}}" class="thumbnail" alt="{{cart[key].productDesc" /></td>
             <td>{{cart[key].productName}}</td>
             <td>{{cart[key].price | currency}}</td>
+            <!--rubric55-->
+            <!--The cost column in the table should update if the quantity input
+                field is changed-->
             <td><input type="number" class="item-qty" [(ngModel)]="cart[key].quantity" (change)="updateSubTotal()" /></td>
             <td>{{cart[key].cost | currency}}</td>
             <td>
-              <button type="button" class="close" aria-label="Close" (click)="removeFromCart(key)">
+              <!--rubric54-->
+              <!--The remove button should remove an item from the shopping
+              cart-->
+              <button type="button" class="close" aria-label="Remove" (click)="removeFromCart(key)">
                 <span aria-hidden="true">&times;</span>
               </button>
             </td>
@@ -38,13 +42,24 @@
     </table>
   </div>
   <div class="col-md-12 col-lg-6">
+    <!--rubric48-->
+    <!--The user should see a form labeled "Enter Shipping Details" that
+        has text input fields for the users name, address, city, and phone
+        number. These input fields should have placeholders that show
+        what they represent.-->
     <h1>Enter Shipping Details</h1>
-    <form class="needs-validation my-2" (ngSubmit)="sendShippingInfo()" [formGroup]="form">
+    <!--rubric52-->
+    <!--The form should show validation errors if the form isn’t filled out
+        correctly and the checkout button is pressed-->
+
+    <!--rubric80-->
+    <!--Used jQuery or Angular for data binding-->
+    <form class="needs-validation my-2" (ngSubmit)="checkOut()" [formGroup]="form">
         <div class="form-group" *ngFor="let key of modelKeys">
           <input class="form-control" 
             [ngClass]="{
-              'is-valid': !form.controls[key].invalid,
-              'is-invalid': form.controls[key].invalid
+              'is-valid': checkoutAttempted && (!form.controls[key].invalid),
+              'is-invalid': checkoutAttempted && form.controls[key].invalid
             }"
             placeholder="Enter {{key | stringHumanize}} Here" formControlName="{{key}}"
             attr.aria-describedby="{{key==='phoneNumber' ? 'phoneHelp' : undefined}}" />
@@ -53,8 +68,22 @@
             Please provide a valid {{key | stringHumanize | lowercase}}
           </div>
         </div>
-        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Checkout</button>
+        <!--rubric50-->
+        <!--The user should see a checkout button-->
+        <button type="submit" class="btn btn-primary" [disabled]="checkoutExecuted">Checkout</button>
     </form>
+    <!--rubric49-->
+    <!--The user should see a section showing the subtotal cost of all the
+        items in the shopping cart, the shipping cost, the tax cost, and a
+        total cost of all of the items in the shopping cart.-->
+
+    <!--rubric53-->
+    <!--The cost details section should update if any items are removed
+        from the shopping cart of if any of the item quantities are
+        updated-->
+
+    <!--rubric80-->
+    <!--Used jQuery or Angular for data binding-->
     <div class="row">
       <div class="col-2">Subtotal:</div>
       <div class="col-1">{{subTotal | currency}}</div>
@@ -67,6 +96,26 @@
     <div class="row">
       <div class="col-2">Tax ({{taxRate * 100}}%):</div>
       <div class="col-1">{{tax | currency}}</div>
+    </div>
+    <div class="row">
+      <div class="col-2">Total:</div>
+      <div class="col-1">{{total | currency}}</div>
+    </div>
+    <!--rubric51-->
+    <!--The checkout button should create an alert based on the users
+        shipping details and total cost.-->
+    <div class="alert alert-success alert-dismissable fade show mt-5 mx-5" role="alert" *ngIf="checkoutExecuted">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="alert-heading">Well done!</h4>
+      <h6>Shipping Details</h6>
+      <p *ngFor="let key of modelKeys">
+          {{key | stringHumanize}}: {{model[key]}}
+      </p>
+      <hr>
+      <p class="mb-0">Total amount: {{total | currency}}</p>
+      
     </div>
   </div>
 </div>

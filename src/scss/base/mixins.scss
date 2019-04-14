@@ -1,3 +1,7 @@
+// rubric79
+// CSS used for site styling. No inline CSS permitted and no styling
+// of HTML elements directly. 
+
 @mixin extra-small-and-above {
     @media only screen and (min-width: 0) {
         @content;
