@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ItemData, Item } from '../models/itemsData';
-//import { PreviousRouteService } from '../services/previous-route.service';
 import { ItemsDataService } from '../services/items-data.service';
 import { ShoppingCartService } from '../services/shopping-cart.service';
 import { CartItem } from '../models/cartData';
@@ -29,7 +28,6 @@ export class ShoppingComponent implements OnInit {
   private sortByRating: string = "rating";
 
   constructor(
-    //private prevRouteService: PreviousRouteService,
     private itemsService: ItemsDataService, 
     private cartService: ShoppingCartService) { }
 

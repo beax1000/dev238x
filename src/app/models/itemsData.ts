@@ -1,20 +1,3 @@
-/* export interface ItemsData {
-    category: string;
-    subcategories: Array<{
-        name: string;
-        items: Array<{
-            name: string;
-            description: string;
-            price: number;
-            imagelink: string;
-            rating: string;
-            stock: string;
-            category: string;
-            subcategory: string;
-        }>;
-    }>;
-} */
-
 export interface Item {
     name: string;
     description: string;
