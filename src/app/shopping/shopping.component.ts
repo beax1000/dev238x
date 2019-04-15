@@ -71,7 +71,7 @@ export class ShoppingComponent implements OnInit {
       // category in the controls bar
       this.selectedSubCatName = selectedSubCat.name;
       this.itemsInSubCatCount = selectedSubCat.items.length;
-      let items = selectedSubCat.items;
+      let items = selectedSubCat.items.slice();
       if (this.onlyInStock)
         items = this.filterInStockOnly(items);
       this.itemsShownCount = items.length;
@@ -88,12 +88,12 @@ export class ShoppingComponent implements OnInit {
     this.onlyInStock = e.target.checked;
     if (this.onlyInStock) {
       this.items = this.filterInStockOnly(this.items);
-      this.itemsShownCount = this.items.length;
     }
     else {
-      let items: Item[] = this.itemsData[this.selectedCatIndex].subcategories[this.selectedSubCatIndex].items;
+      let items: Item[] = this.itemsData[this.selectedCatIndex].subcategories[this.selectedSubCatIndex].items.slice();
       this.items = this.performItemsSorting(items);
     }
+    this.itemsShownCount = this.items.length;
   }
 
   filterInStockOnly(itemsToFilter: Item[]):Item[] {
@@ -116,6 +116,9 @@ export class ShoppingComponent implements OnInit {
   manageItemsSorting(sortBy: string) {
     switch(sortBy) {
       case this.sortByNone:
+        this.items = this.itemsData[this.selectedCatIndex].subcategories[this.selectedSubCatIndex].items.slice();
+        if (this.onlyInStock)
+          this.items = this.filterInStockOnly(this.items);
         this.sortByText = "None";
         break;
       case this.sortByPrice:
